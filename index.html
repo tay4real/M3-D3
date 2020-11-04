@@ -671,7 +671,7 @@
               </div>
             </div>`;
       };
-      const card_row = document.getElementById("")
+      const card_row = document.querySelector("");
       card_row.addEventListener("click", () => {
         let images = fetch(
           "http://www.splashbase.co/api/v1/images/search?query=laptop",
@@ -683,7 +683,6 @@
             return response.json();
           })
           .then((data) => {
-            
             loadImages.innerHTML = "";
             images = [];
 
@@ -692,7 +691,7 @@
               document.getElementById("found").classList.remove("d-none");
 
               images.forEach((image) => {
-                card(image)
+                card(image);
               });
             }
           });
