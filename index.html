@@ -174,8 +174,12 @@
             them in a cool way!
           </p>
           <p>
-            <a href="#" class="btn btn-primary my-2">Load Images</a>
-            <a href="#" class="btn btn-secondary my-2">Load Secondary Images</a>
+            <a id="loadimage" href="#" class="btn btn-primary my-2"
+              >Load Images</a
+            >
+            <a id="loadsecondary" href="#" class="btn btn-secondary my-2"
+              >Load Secondary Images</a
+            >
           </p>
         </div>
       </section>
@@ -630,5 +634,69 @@
       integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      const loadImages = document.getElementById("loadimage");
+
+      const card = (images) => {
+        return `<div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img src=${image.url}/>
+                <div class="card-body">
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit
+                    longer.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+      };
+      const card_row = document.getElementById("")
+      card_row.addEventListener("click", () => {
+        let images = fetch(
+          "http://www.splashbase.co/api/v1/images/search?query=laptop",
+          {
+            method: "GET",
+          }
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            
+            loadImages.innerHTML = "";
+            images = [];
+
+            images = data.images;
+            if (images.length > 0) {
+              document.getElementById("found").classList.remove("d-none");
+
+              images.forEach((image) => {
+                card(image)
+              });
+            }
+          });
+      });
+    </script>
   </body>
 </html>
