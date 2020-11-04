@@ -695,6 +695,30 @@
             });
           });
       });
+
+      const loadsecondary = document.getElementById("loadsecondary");
+      loadsecondary.addEventListener("click", () => {
+        let images = fetch(
+          "http://www.splashbase.co/api/v1/images/search?query=phone",
+          {
+            method: "GET",
+          }
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            const card_row = document.querySelector(".album .container .row");
+            card_row.innerHTML = "";
+            images = [];
+
+            images = data.images;
+
+            images.map((image) => {
+              card_row.innerHTML += card(image);
+            });
+          });
+      });
     </script>
   </body>
 </html>
